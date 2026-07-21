@@ -158,7 +158,8 @@ export default defineSchema({
     .index('by_outcome', ['outcome'])
     .index('by_discoveredAt', ['discoveredAt'])
     .index('by_email', ['email'])
-    .index('by_outreachState', ['outreachState']),
+    .index('by_outreachState', ['outreachState'])
+    .index('by_nextActionAt', ['nextActionAt']),
 
   email_drafts: defineTable({
     leadId: v.optional(v.id('leads')),
@@ -656,6 +657,8 @@ export default defineSchema({
       v.literal('awaiting_dusk_approval'),
       v.literal('product_ready_to_sell'),
     ),
+    liveUrl: v.optional(v.string()), // added 2026-07-20 — existing data drift fix
+    score: v.optional(v.float64()), // added 2026-07-20 — existing data drift fix
     sourcePath: v.string(), // relative path in ~/obsidian-vault/builds/
     agentId: v.literal('builds'),
     createdAt: v.number(),
@@ -797,4 +800,405 @@ export default defineSchema({
     .index('by_ownerPhone', ['ownerPhone'])
     .index('by_createdAt', ['createdAt'])
     .index('by_outcome', ['outcome']),
+
+  // ================================================================
+  // AIOS Control Plane — EMVY internal operating layer
+  // Added 2026-07-20 via BOARD-002. These tables are the structured
+  // data layer for the EMVY AIOS operator control plane beyond the
+  // CRM/pipeline foundation: Codex build slices, voice agent QA,
+  // product catalog, client workspace management, SOP skill registry,
+  // evidence-based improvements, and business communication records.
+  //
+  // ADR-0002 note (2026-07-20): Both schema files were updated
+  // simultaneously in this session. Existing drift (board has
+  // build_projects/build_requests/build_ideas/settings not in website;
+  // website has spark_response_calls/blog_posts with stricter types
+  // not mirrored in board) is documented at
+  // docs/adr/0002-convex-schema-ownership.md.
+  // ================================================================
+
+  codex_slices: defineTable({
+    sliceId: v.string(),
+    title: v.string(),
+    context: v.string(),
+    repoName: v.optional(v.string()),
+    repoUrl: v.optional(v.string()),
+    projectId: v.optional(v.id('build_projects')),
+    objective: v.string(),
+    scopeIn: v.optional(v.string()),
+    scopeOut: v.optional(v.string()),
+    dependencies: v.optional(v.array(v.string())),
+    sourceOfTruth: v.optional(v.string()),
+    acceptanceCriteria: v.optional(v.string()),
+    tests: v.optional(v.string()),
+    securityNotes: v.optional(v.string()),
+    rollback: v.optional(v.string()),
+    documentationUpdates: v.optional(v.string()),
+    vaultUpdates: v.optional(v.string()),
+    skillReviewNeeded: v.optional(v.boolean()),
+    contentEvent: v.optional(v.boolean()),
+    status: v.union(
+      v.literal('draft'),
+      v.literal('ready_for_codex'),
+      v.literal('in_codex'),
+      v.literal('needs_review'),
+      v.literal('needs_fix'),
+      v.literal('testing'),
+      v.literal('shipped'),
+      v.literal('blocked'),
+      v.literal('archived'),
+    ),
+    priority: v.optional(
+      v.union(v.literal('critical'), v.literal('high'), v.literal('medium'), v.literal('low'), v.literal('later')),
+    ),
+    prLink: v.optional(v.string()),
+    deploymentLink: v.optional(v.string()),
+    testEvidence: v.optional(v.string()),
+    blocker: v.optional(v.string()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+    shippedAt: v.optional(v.number()),
+  })
+    .index('by_sliceId', ['sliceId'])
+    .index('by_status', ['status'])
+    .index('by_projectId', ['projectId'])
+    .index('by_context', ['context'])
+    .index('by_createdAt', ['createdAt']),
+
+  voice_agents: defineTable({
+    name: v.string(),
+    productFamily: v.union(
+      v.literal('receptionist'),
+      v.literal('sales'),
+      v.literal('support'),
+      v.literal('booking'),
+      v.literal('follow_up'),
+      v.literal('other'),
+    ),
+    vertical: v.union(
+      v.literal('emvy_internal'),
+      v.literal('hospitality'),
+      v.literal('trades'),
+      v.literal('real_estate'),
+      v.literal('other'),
+    ),
+    platform: v.union(
+      v.literal('retell'),
+      v.literal('vapi'),
+      v.literal('telnyx'),
+      v.literal('other'),
+    ),
+    phoneNumberRef: v.optional(v.string()),
+    repoName: v.optional(v.string()),
+    deploymentUrl: v.optional(v.string()),
+    status: v.union(
+      v.literal('draft'),
+      v.literal('configured'),
+      v.literal('testing'),
+      v.literal('pitch_ready'),
+      v.literal('live'),
+      v.literal('paused'),
+      v.literal('broken'),
+      v.literal('archived'),
+    ),
+    lastTestedAt: v.optional(v.number()),
+    passRate: v.optional(v.number()),
+    notes: v.optional(v.string()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_name', ['name'])
+    .index('by_status', ['status'])
+    .index('by_vertical', ['vertical'])
+    .index('by_productFamily', ['productFamily']),
+
+  voice_tests: defineTable({
+    agentId: v.id('voice_agents'),
+    testScriptId: v.optional(v.string()),
+    scenario: v.string(),
+    result: v.union(
+      v.literal('pass'),
+      v.literal('fail'),
+      v.literal('partial'),
+      v.literal('retest_needed'),
+    ),
+    failureType: v.optional(
+      v.union(
+        v.literal('no_answer'),
+        v.literal('dead_air'),
+        v.literal('misheard_caller'),
+        v.literal('wrong_intent'),
+        v.literal('bad_escalation'),
+        v.literal('missed_required_field'),
+        v.literal('overpromised'),
+        v.literal('looped_response'),
+        v.literal('bad_handoff'),
+        v.literal('bad_close'),
+        v.literal('latency_issue'),
+        v.literal('tool_failure'),
+      ),
+    ),
+    transcriptLink: v.optional(v.string()),
+    recordingLink: v.optional(v.string()),
+    notes: v.optional(v.string()),
+    fixSliceId: v.optional(v.id('codex_slices')),
+    testedBy: v.string(),
+    testedAt: v.number(),
+    // BOARD-009B — retest support. When voice_tests represents a retest,
+    // retestOfTestId links back to the original test. Original tests have
+    // retestOfTestId unset.
+    retestOfTestId: v.optional(v.id('voice_tests')),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_agentId', ['agentId'])
+    .index('by_result', ['result'])
+    .index('by_fixSliceId', ['fixSliceId'])
+    .index('by_testedAt', ['testedAt'])
+    .index('by_retestOfTestId', ['retestOfTestId']),
+
+  products: defineTable({
+    name: v.string(),
+    category: v.union(
+      v.literal('voice_agent'),
+      v.literal('audit'),
+      v.literal('automation'),
+      v.literal('maintenance'),
+      v.literal('custom_aios'),
+    ),
+    targetSector: v.optional(v.string()),
+    status: v.union(
+      v.literal('idea'),
+      v.literal('packaging'),
+      v.literal('demo_ready'),
+      v.literal('sellable'),
+      v.literal('live'),
+      v.literal('paused'),
+      v.literal('archived'),
+    ),
+    priceModel: v.optional(v.string()),
+    setupPrice: v.optional(v.number()),
+    monthlyPrice: v.optional(v.number()),
+    demoAvailable: v.optional(v.boolean()),
+    relatedProjectIds: v.optional(v.array(v.id('build_projects'))),
+    salesAssets: v.optional(v.array(v.string())),
+    deliveryChecklist: v.optional(v.array(v.string())),
+    notes: v.optional(v.string()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_name', ['name'])
+    .index('by_category', ['category'])
+    .index('by_status', ['status']),
+
+  clients: defineTable({
+    name: v.string(),
+    status: v.union(
+      v.literal('prospect'),
+      v.literal('discovery'),
+      v.literal('audit'),
+      v.literal('build'),
+      v.literal('maintenance'),
+      v.literal('paused'),
+      v.literal('complete'),
+      v.literal('lost'),
+    ),
+    leadId: v.optional(v.id('leads')),
+    primaryContactName: v.optional(v.string()),
+    primaryContactEmail: v.optional(v.string()),
+    primaryContactPhone: v.optional(v.string()),
+    workspacePath: v.optional(v.string()),
+    githubRepoUrl: v.optional(v.string()),
+    activeOfferId: v.optional(v.string()),
+    currentProjectId: v.optional(v.id('build_projects')),
+    nextDelivery: v.optional(v.number()),
+    deliveryHealth: v.union(
+      v.literal('green'),
+      v.literal('yellow'),
+      v.literal('red'),
+      v.literal('unknown'),
+    ),
+    notes: v.optional(v.string()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_name', ['name'])
+    .index('by_status', ['status'])
+    .index('by_deliveryHealth', ['deliveryHealth'])
+    .index('by_leadId', ['leadId']),
+
+  workspaces: defineTable({
+    name: v.string(),
+    type: v.union(
+      v.literal('client'),
+      v.literal('prospect'),
+      v.literal('internal'),
+      v.literal('product'),
+      v.literal('research'),
+      v.literal('archive'),
+    ),
+    localPath: v.optional(v.string()),
+    githubRepoUrl: v.optional(v.string()),
+    sourceOfTruth: v.union(
+      v.literal('board'),
+      v.literal('github'),
+      v.literal('vault'),
+      v.literal('local'),
+      v.literal('external_provider'),
+    ),
+    relatedClientId: v.optional(v.id('clients')),
+    relatedLeadId: v.optional(v.id('leads')),
+    relatedProjectId: v.optional(v.id('build_projects')),
+    status: v.optional(v.string()),
+    notes: v.optional(v.string()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_type', ['type'])
+    .index('by_relatedClientId', ['relatedClientId'])
+    .index('by_relatedProjectId', ['relatedProjectId']),
+
+  skills: defineTable({
+    name: v.string(),
+    skillId: v.string(),
+    category: v.union(
+      v.literal('repo_audit'),
+      v.literal('voice_qa'),
+      v.literal('receptionist_build'),
+      v.literal('website_audit'),
+      v.literal('client_workspace'),
+      v.literal('crm_automation'),
+      v.literal('codex_execution'),
+      v.literal('sales_process'),
+      v.literal('content'),
+      v.literal('mail'),
+    ),
+    status: v.union(
+      v.literal('proposed'),
+      v.literal('draft'),
+      v.literal('active'),
+      v.literal('needs_update'),
+      v.literal('archived'),
+    ),
+    filePath: v.optional(v.string()),
+    githubPath: v.optional(v.string()),
+    usedByProjectIds: v.optional(v.array(v.id('build_projects'))),
+    lastUsedAt: v.optional(v.number()),
+    needsUpdate: v.optional(v.boolean()),
+    version: v.optional(v.string()),
+    notes: v.optional(v.string()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_skillId', ['skillId'])
+    .index('by_category', ['category'])
+    .index('by_status', ['status']),
+
+  improvements: defineTable({
+    title: v.string(),
+    source: v.union(
+      v.literal('call_failure'),
+      v.literal('client_feedback'),
+      v.literal('website_review'),
+      v.literal('codex_finding'),
+      v.literal('bug'),
+      v.literal('sales_objection'),
+      v.literal('manual_observation'),
+      v.literal('analytics'),
+      v.literal('email'),
+    ),
+    relatedProjectId: v.optional(v.id('build_projects')),
+    relatedVoiceTestId: v.optional(v.id('voice_tests')),
+    relatedClientId: v.optional(v.id('clients')),
+    evidence: v.string(),
+    impact: v.union(v.literal('high'), v.literal('medium'), v.literal('low')),
+    effort: v.union(v.literal('small'), v.literal('medium'), v.literal('large'), v.literal('unknown')),
+    priority: v.optional(
+      v.union(v.literal('critical'), v.literal('high'), v.literal('medium'), v.literal('low')),
+    ),
+    status: v.union(
+      v.literal('captured'),
+      v.literal('reviewed'),
+      v.literal('approved'),
+      v.literal('converted_to_slice'),
+      v.literal('rejected'),
+      v.literal('shipped'),
+      v.literal('archived'),
+    ),
+    proposedSliceId: v.optional(v.id('codex_slices')),
+    // BOARD-009B — retest status on the improvement lifecycle. Set when an
+    // improvement has a corresponding retest workflow. Mapped as close as
+    // possible to the spec's simple statuses (not_required/required/scheduled/
+    // completed_pass/completed_partial/completed_fail). Stored as an optional
+    // string so existing rows without retest status still validate.
+    retestStatus: v.optional(
+      v.union(
+        v.literal('not_required'),
+        v.literal('required'),
+        v.literal('scheduled'),
+        v.literal('completed_pass'),
+        v.literal('completed_partial'),
+        v.literal('completed_fail'),
+      ),
+    ),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_status', ['status'])
+    .index('by_source', ['source'])
+    .index('by_impact', ['impact'])
+    .index('by_proposedSliceId', ['proposedSliceId'])
+    .index('by_createdAt', ['createdAt']),
+
+  communications: defineTable({
+    subject: v.string(),
+    from: v.string(),
+    to: v.optional(v.string()),
+    mailbox: v.union(
+      v.literal('emvy_business'),
+      v.literal('personal'),
+      v.literal('provider_admin'),
+      v.literal('client'),
+      v.literal('other'),
+    ),
+    type: v.union(
+      v.literal('sales_lead'),
+      v.literal('follow_up'),
+      v.literal('client_delivery'),
+      v.literal('support'),
+      v.literal('proposal'),
+      v.literal('invoice_admin'),
+      v.literal('provider'),
+      v.literal('personal'),
+      v.literal('noise'),
+    ),
+    relatedLeadId: v.optional(v.id('leads')),
+    relatedClientId: v.optional(v.id('clients')),
+    relatedProjectId: v.optional(v.id('build_projects')),
+    status: v.union(
+      v.literal('unread'),
+      v.literal('needs_reply'),
+      v.literal('draft_ready'),
+      v.literal('waiting'),
+      v.literal('actioned'),
+      v.literal('converted_to_task'),
+      v.literal('converted_to_deal'),
+      v.literal('archived'),
+    ),
+    priority: v.optional(
+      v.union(v.literal('high'), v.literal('medium'), v.literal('low')),
+    ),
+    nextAction: v.optional(v.string()),
+    followUpDate: v.optional(v.number()),
+    threadLink: v.optional(v.string()),
+    summary: v.optional(v.string()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_mailbox', ['mailbox'])
+    .index('by_type', ['type'])
+    .index('by_status', ['status'])
+    .index('by_relatedLeadId', ['relatedLeadId'])
+    .index('by_relatedClientId', ['relatedClientId'])
+    .index('by_followUpDate', ['followUpDate']),
 })
