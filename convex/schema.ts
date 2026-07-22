@@ -667,6 +667,73 @@ export default defineSchema({
     .index('by_stage', ['stage'])
     .index('by_createdAt', ['createdAt']),
 
+  build_projects: defineTable({
+    project: v.string(),
+    lane: v.union(
+      v.literal('client'),
+      v.literal('local'),
+      v.literal('vps'),
+      v.literal('management'),
+    ),
+    repoPath: v.string(),
+    liveTarget: v.string(),
+    liveUrl: v.optional(v.string()),
+    owner: v.string(),
+    status: v.string(),
+    nextAction: v.string(),
+    lastVerified: v.string(),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_project', ['project'])
+    .index('by_lane', ['lane'])
+    .index('by_createdAt', ['createdAt']),
+
+  build_requests: defineTable({
+    project: v.optional(v.string()),
+    requestText: v.string(),
+    status: v.union(
+      v.literal('requested'),
+      v.literal('needs_approval'),
+      v.literal('approved'),
+      v.literal('rejected'),
+      v.literal('in_progress'),
+      v.literal('blocked'),
+      v.literal('complete'),
+    ),
+    proposal: v.optional(v.string()),
+    nextAction: v.optional(v.string()),
+    blocker: v.optional(v.string()),
+    requestedBy: v.string(),
+    claimedBy: v.optional(v.string()),
+    claimedAt: v.optional(v.number()),
+    approvedBy: v.optional(v.string()),
+    approvedAt: v.optional(v.number()),
+    rejectedReason: v.optional(v.string()),
+    completedAt: v.optional(v.number()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_status', ['status'])
+    .index('by_createdAt', ['createdAt'])
+    .index('by_status_and_createdAt', ['status', 'createdAt']),
+
+  build_ideas: defineTable({
+    title: v.string(),
+    summary: v.string(),
+    category: v.string(),
+    source: v.string(),
+    status: v.union(v.literal('idea'), v.literal('promoted')),
+    notes: v.optional(v.string()),
+    promotedRequestId: v.optional(v.id('build_requests')),
+    promotedAt: v.optional(v.number()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_status', ['status'])
+    .index('by_createdAt', ['createdAt'])
+    .index('by_status_and_createdAt', ['status', 'createdAt']),
+
   // === Competitor Pricing Matrix (Intelligence agent output, surfaced on /pricing) ===
   // Written by the seed script from the 2026-06-16 VPS pricing_matrix artifact.
   // The intelligence agent can PATCH rows via hermes/pricing:upsertCompetitor;
@@ -855,6 +922,9 @@ export default defineSchema({
     deploymentLink: v.optional(v.string()),
     testEvidence: v.optional(v.string()),
     blocker: v.optional(v.string()),
+    sourceRecordType: v.optional(v.string()),
+    sourceRecordId: v.optional(v.string()),
+    sourceTitle: v.optional(v.string()),
     createdAt: v.number(),
     updatedAt: v.number(),
     shippedAt: v.optional(v.number()),
@@ -1201,4 +1271,141 @@ export default defineSchema({
     .index('by_relatedLeadId', ['relatedLeadId'])
     .index('by_relatedClientId', ['relatedClientId'])
     .index('by_followUpDate', ['followUpDate']),
+
+  // BOARD-014 — Office Automation Workflow Intake. Captures automation
+  // opportunities across internal and client-facing workflows. Each item
+  // tracks the problem, workflow area, linked records, and progression
+  // from capture through to live/maintenance or Codex slice.
+  automationWorkflowIntake: defineTable({
+    title: v.string(),
+    issue: v.string(),
+    workflowArea: v.union(
+      v.literal('inbox_triage'),
+      v.literal('email_automation'),
+      v.literal('calendar_automation'),
+      v.literal('proposal_automation'),
+      v.literal('audit_report_generation'),
+      v.literal('crm_updates'),
+      v.literal('follow_ups'),
+      v.literal('document_generation'),
+      v.literal('reporting_packs'),
+      v.literal('admin_workflow_routing'),
+    ),
+    source: v.union(
+      v.literal('internal'),
+      v.literal('client_request'),
+      v.literal('client_observation'),
+      v.literal('voice_qa'),
+      v.literal('improvement'),
+      v.literal('codex_finding'),
+      v.literal('manual'),
+    ),
+    isClientFacing: v.boolean(),
+    priority: v.union(
+      v.literal('critical'),
+      v.literal('high'),
+      v.literal('medium'),
+      v.literal('low'),
+    ),
+    status: v.union(
+      v.literal('captured'),
+      v.literal('needs_scoping'),
+      v.literal('ready_for_improvement'),
+      v.literal('ready_for_codex'),
+      v.literal('in_build'),
+      v.literal('testing'),
+      v.literal('live'),
+      v.literal('maintenance'),
+      v.literal('blocked'),
+    ),
+    recommendedBuild: v.optional(v.string()),
+    nextAction: v.optional(v.string()),
+    linkedClientId: v.optional(v.id('clients')),
+    linkedWorkspaceId: v.optional(v.id('workspaces')),
+    linkedProductId: v.optional(v.id('products')),
+    linkedImprovementId: v.optional(v.id('improvements')),
+    linkedCodexSliceId: v.optional(v.id('codex_slices')),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_status', ['status'])
+    .index('by_workflowArea', ['workflowArea'])
+    .index('by_priority', ['priority'])
+    .index('by_source', ['source'])
+    .index('by_linkedClientId', ['linkedClientId'])
+    .index('by_createdAt', ['createdAt']),
+
+  // BOARD-015 — Audit Findings → Build Recommendations (mirror of website schema)
+  // Structured build recommendations derived from audit findings. Links to clients,
+  // workspaces, products, office automation intake items, improvements, and Codex slices.
+  auditBuildRecommendations: defineTable({
+    title: v.string(),
+    finding: v.string(),
+    severity: v.union(
+      v.literal('low'),
+      v.literal('medium'),
+      v.literal('high'),
+      v.literal('critical'),
+    ),
+    workflowArea: v.union(
+      v.literal('sales_process'),
+      v.literal('client_communication'),
+      v.literal('inbox_mail'),
+      v.literal('quoting_proposal'),
+      v.literal('calendar_booking'),
+      v.literal('bookkeeping_reporting'),
+      v.literal('customer_intake'),
+      v.literal('delivery_ops'),
+      v.literal('marketing_content'),
+      v.literal('voice_operations'),
+      v.literal('other'),
+    ),
+    source: v.union(
+      v.literal('sage_audit'),
+      v.literal('chatbot_audit'),
+      v.literal('discovery_call'),
+      v.literal('client_feedback'),
+      v.literal('manual'),
+      v.literal('voice_qa'),
+      v.literal('codex_finding'),
+    ),
+    recommendedBuild: v.optional(v.string()),
+    priority: v.union(
+      v.literal('critical'),
+      v.literal('high'),
+      v.literal('medium'),
+      v.literal('low'),
+    ),
+    status: v.union(
+      v.literal('captured'),
+      v.literal('needs_review'),
+      v.literal('recommended'),
+      v.literal('ready_for_intake'),
+      v.literal('ready_for_codex'),
+      v.literal('in_build'),
+      v.literal('testing'),
+      v.literal('live'),
+      v.literal('rejected'),
+      v.literal('archived'),
+    ),
+    nextAction: v.optional(v.string()),
+    linkedAuditRegisterId: v.optional(v.id('audit_register')),
+    linkedChatbotLeadId: v.optional(v.id('audit_chatbot_leads')),
+    linkedClientId: v.optional(v.id('clients')),
+    linkedWorkspaceId: v.optional(v.id('workspaces')),
+    linkedProductId: v.optional(v.id('products')),
+    linkedAutomationIntakeId: v.optional(v.id('automationWorkflowIntake')),
+    linkedImprovementId: v.optional(v.id('improvements')),
+    linkedCodexSliceId: v.optional(v.id('codex_slices')),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_status', ['status'])
+    .index('by_severity', ['severity'])
+    .index('by_priority', ['priority'])
+    .index('by_workflowArea', ['workflowArea'])
+    .index('by_source', ['source'])
+    .index('by_linkedClientId', ['linkedClientId'])
+    .index('by_linkedWorkspaceId', ['linkedWorkspaceId'])
+    .index('by_createdAt', ['createdAt']),
 })
