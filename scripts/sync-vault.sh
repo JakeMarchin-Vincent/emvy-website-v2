@@ -14,7 +14,7 @@
 
 set -euo pipefail
 
-VAULT="/Users/DuskWunz/Documents/Claude Vault"
+VAULT="/Users/DuskWunz/Documents/Claude/Claude Vault"
 INBOX="$VAULT/Inbox.md"
 DATE=$(date +%Y-%m-%d)
 TIME=$(date +%H:%M)
@@ -23,6 +23,7 @@ DATE_LONG=$(date "+%Y-%m-%d %H:%M %Z")
 # Configurable repo roots — add new projects here as they spin up.
 REPO_ROOTS=(
   "$HOME/Documents"
+  "$HOME/emvy"
 )
 
 # Skip paths containing any of these substrings (trash, vendor, etc.)

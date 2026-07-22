@@ -16,7 +16,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/DuskWunz/Documents/emvy-website-v2/scripts/sync-vault.sh",
+            "command": "/Users/DuskWunz/emvy/01-websites/emvy-website-v2/scripts/sync-vault.sh",
             "timeout": 10
           }
         ]
