@@ -1,3 +1,4 @@
+import { CAL_CONSULT_URL } from '@/lib/cal-links'
 import Link from 'next/link'
 
 const primaryLinks = [
@@ -8,7 +9,7 @@ const primaryLinks = [
 ]
 
 const conversionLinks = [
-  { label: 'Book a 20-minute AI Consult', href: 'https://cal.com/jake-emvy/discovery-call' },
+  { label: 'Book a 20-minute AI Consult', href: CAL_CONSULT_URL },
   { label: 'AI Workflow Assessment', href: '/services#assessment' },
   { label: 'AI Builds', href: '/services#builds' },
   { label: 'Ongoing Improvement', href: '/services#improvement' },

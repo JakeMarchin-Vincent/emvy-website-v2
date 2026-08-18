@@ -1,3 +1,4 @@
+import { CAL_CONSULT_URL } from '@/lib/cal-links'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '../../components/PageHero'
@@ -55,7 +56,7 @@ export default function UseCasesPage() {
         description="These are capability examples, not fixed products. The right system depends on the business and its workflow."
         image="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1800&q=90&auto=format&fit=crop"
       >
-        <a href="https://cal.com/jake-emvy/discovery-call" className="button light" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
+        <a href={CAL_CONSULT_URL} className="button light" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
         <Link href="/services" className="button secondary">View services</Link>
       </PageHero>
 
@@ -92,7 +93,7 @@ export default function UseCasesPage() {
             Start with a free 20-minute AI Consult, then decide what makes sense.
           </p>
         </div>
-        <a href="https://cal.com/jake-emvy/discovery-call" className="button primary" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
+        <a href={CAL_CONSULT_URL} className="button primary" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
       </section>
     </>
   )

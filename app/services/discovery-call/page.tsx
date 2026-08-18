@@ -1,3 +1,4 @@
+import { CAL_CONSULT_URL } from '@/lib/cal-links'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '../../../components/PageHero'
@@ -27,7 +28,7 @@ export default function DiscoveryCallPage() {
         image="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1800&q=90&auto=format&fit=crop"
       >
         <a
-          href="https://cal.com/jake-emvy/discovery-call"
+          href={CAL_CONSULT_URL}
           className="button primary"
           target="_blank"
           rel="noopener noreferrer"
@@ -65,7 +66,7 @@ export default function DiscoveryCallPage() {
         </div>
         <a
           className="button primary"
-          href="https://cal.com/jake-emvy/discovery-call"
+          href={CAL_CONSULT_URL}
           target="_blank"
           rel="noopener noreferrer"
         >

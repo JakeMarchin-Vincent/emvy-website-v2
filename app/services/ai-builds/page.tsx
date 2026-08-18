@@ -1,3 +1,4 @@
+import { CAL_CONSULT_URL } from '@/lib/cal-links'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageHero from '../../../components/PageHero'
@@ -27,7 +28,7 @@ export default function AIBuildsPage() {
         description="EMVY designs and builds practical AI systems around a clear operational need, using the tools and processes your team already works with."
         image="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1800&q=90&auto=format&fit=crop"
       >
-        <a href="https://cal.com/jake-emvy/discovery-call" className="button primary" target="_blank" rel="noopener noreferrer">Book a consult</a>
+        <a href={CAL_CONSULT_URL} className="button primary" target="_blank" rel="noopener noreferrer">Book a consult</a>
         <Link href="/services" className="button secondary">View services</Link>
       </PageHero>
 
@@ -38,7 +39,7 @@ export default function AIBuildsPage() {
         </div>
       </section>
 
-      <section className="section cta-band"><div><p className="section-kicker">Start here</p><h2 className="section-title">Talk through the work first.</h2><p className="section-text">A consult gives us a useful starting point for a tailored build.</p></div><a href="https://cal.com/jake-emvy/discovery-call" className="button primary" target="_blank" rel="noopener noreferrer">Book a consult</a></section>
+      <section className="section cta-band"><div><p className="section-kicker">Start here</p><h2 className="section-title">Talk through the work first.</h2><p className="section-text">A consult gives us a useful starting point for a tailored build.</p></div><a href={CAL_CONSULT_URL} className="button primary" target="_blank" rel="noopener noreferrer">Book a consult</a></section>
     </>
   )
 }

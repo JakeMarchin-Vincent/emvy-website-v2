@@ -1,5 +1,6 @@
 'use client'
 
+import { CAL_CONSULT_URL } from '@/lib/cal-links'
 import Link from 'next/link'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
@@ -36,7 +37,7 @@ export default function Header() {
 
       <div className="header-actions">
         <a
-          href="https://cal.com/jake-emvy/discovery-call"
+          href={CAL_CONSULT_URL}
           className="button primary small"
           target="_blank"
           rel="noopener noreferrer"
@@ -54,7 +55,7 @@ export default function Header() {
           <Link href="/use-cases" onClick={() => setMobileOpen(false)}>Use Cases</Link>
           <Link href="/about" onClick={() => setMobileOpen(false)}>About</Link>
           <Link href="/contact" onClick={() => setMobileOpen(false)}>Contact</Link>
-          <a href="https://cal.com/jake-emvy/discovery-call" target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}>Book a 20-minute AI Consult</a>
+          <a href={CAL_CONSULT_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}>Book a 20-minute AI Consult</a>
         </div>
       ) : null}
     </header>

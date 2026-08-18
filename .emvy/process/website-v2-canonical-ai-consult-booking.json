@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "status": "implementation-ready",
+  "feature": "website-v2-canonical-ai-consult-booking",
+  "repo": "/Users/DuskWunz/emvy-worktrees/website-v2-canonical-ai-consult-booking",
+  "process": {
+    "canonical": "mattpocock-wayfinder-to-spec-to-tickets-implement",
+    "contractVersion": 1
+  },
+  "boundary": {
+    "externalActionsAuthorised": false,
+    "note": "Implementation is authorised. Production deployment remains a separate explicit action after verification."
+  },
+  "gates": {
+    "wayfinder": {
+      "status": "not-required",
+      "rationale": "Bounded repair of an existing ready-for-agent website specification; no new product, route deletion or redesign."
+    },
+    "toSpec": {
+      "status": "ready-for-agent",
+      "path": "docs/specs/2026-08-09-emvy-website-canonical-ai-consult-booking-spec.md",
+      "approvedSha256": "418887a81a1384f862267347374df48d0f39cd5584fbfbef2050a8104b1cf821"
+    },
+    "testSeams": {
+      "status": "confirmed",
+      "confirmedBy": "Dusk / founder",
+      "confirmedAt": "2026-08-18T18:08:19+08:00",
+      "approvalEvidence": {
+        "path": ".emvy/approval/test-seam-confirmation.md",
+        "recordedBy": "MEWY",
+        "recordedAt": "2026-08-18T18:08:19+08:00",
+        "approvedBy": "Dusk / founder",
+        "approvedAt": "2026-08-18T18:08:19+08:00",
+        "quote": "please fix so the website is aligned with this one, its our new cal.com account linked to jake@emvyai.com",
+        "sha256": "b6255da6773efb596eee9b1eba8c260fd41855292c91e7fcedbb0cc97b1447a5"
+      }
+    },
+    "toTickets": {
+      "status": "approved",
+      "path": ".scratch/website-v2-canonical-ai-consult-booking/issues",
+      "ticketSetSha256": "367ab9c4a9f3928323fc002b216e20a24d07d8c603cd57d7125cbba56113a01b",
+      "quiz": {
+        "completed": true,
+        "approvedBy": "Dusk / founder",
+        "approvedAt": "2026-08-18T18:08:19+08:00",
+        "granularity": "One vertical ticket for the bounded consult-link migration.",
+        "blockingEdges": "Public consult CTAs must not continue sending visitors to the obsolete account.",
+        "mergeSplit": "Keep one ticket because all changes share one canonical URL and one acceptance seam.",
+        "approvalEvidence": {
+          "path": ".emvy/approval/to-tickets-approval.md",
+          "recordedBy": "MEWY",
+          "recordedAt": "2026-08-18T18:08:19+08:00",
+          "approvedBy": "Dusk / founder",
+          "approvedAt": "2026-08-18T18:08:19+08:00",
+          "quote": "please fix so the website is aligned with this one, its our new cal.com account linked to jake@emvyai.com",
+          "sha256": "5e3d7a8252aac7bdeeafcfd04d8e2702b2183fe21794ec1f897b698380559239"
+        }
+      }
+    },
+    "implementation": {
+      "activeTicket": ".scratch/website-v2-canonical-ai-consult-booking/issues/01-canonical-consult-booking-ctas.md",
+      "ticketStatus": "approved",
+      "tddPlan": "Add a repository assertion for the canonical URL and obsolete URL exclusion, then run the existing website test and build suites.",
+      "ticketSha256": "17098037dec51c23c85a129cd92874984d96470e6c62dd9ce0f6779d5e5b5be2",
+      "sliceCommit": false,
+      "worktree": {
+        "isolated": true,
+        "branch": "codex/website-v2-canonical-ai-consult-booking",
+        "path": "/Users/DuskWunz/emvy-worktrees/website-v2-canonical-ai-consult-booking"
+      },
+      "approvedBy": "Dusk / founder",
+      "approvedAt": "2026-08-18T18:08:19+08:00",
+      "approvalEvidence": {
+        "path": ".emvy/approval/to-tickets-approval.md",
+        "recordedBy": "MEWY",
+        "recordedAt": "2026-08-18T18:08:19+08:00",
+        "approvedBy": "Dusk / founder",
+        "approvedAt": "2026-08-18T18:08:19+08:00",
+        "quote": "please fix so the website is aligned with this one, its our new cal.com account linked to jake@emvyai.com",
+        "sha256": "5e3d7a8252aac7bdeeafcfd04d8e2702b2183fe21794ec1f897b698380559239"
+      }
+    },
+    "codeReview": {
+      "fixedPoint": null,
+      "status": null,
+      "standardsEvidence": null,
+      "specEvidence": null
+    },
+    "verification": {
+      "status": null,
+      "browserEvidence": null,
+      "automated": null
+    },
+    "handoff": {
+      "status": null,
+      "nextPhasePlan": "Verify production deployment and representative live consult CTAs after release.",
+      "completionGuard": null
+    }
+  }
+}

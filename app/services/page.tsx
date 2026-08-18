@@ -1,3 +1,4 @@
+import { CAL_CONSULT_URL } from '@/lib/cal-links'
 import type { Metadata } from 'next'
 import PageHero from '../../components/PageHero'
 
@@ -40,7 +41,7 @@ const stages = [
 export default function ServicesPage() {
   return <>
     <PageHero eyebrow="Services" title="A clear path from workflow to useful system." description="EMVY helps Australian businesses assess the work, build what helps, and improve operations over time." image="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1800&q=90&auto=format&fit=crop">
-      <a href="https://cal.com/jake-emvy/discovery-call" className="button light" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
+      <a href={CAL_CONSULT_URL} className="button light" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
     </PageHero>
 
     <section className="section service-flow-intro">
@@ -57,14 +58,14 @@ export default function ServicesPage() {
           <h2>{stage.title}</h2>
           <p>{stage.description}</p>
           <ul>{stage.points.map((point) => <li key={point}>{point}</li>)}</ul>
-          {stage.id === 'consult' ? <a href="https://cal.com/jake-emvy/discovery-call" className="inline-link" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a> : null}
+          {stage.id === 'consult' ? <a href={CAL_CONSULT_URL} className="inline-link" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a> : null}
         </div>
       </div>
     </section>)}
 
     <section className="section final-cta-section">
       <div className="section-header"><p className="section-kicker">Start here</p><h2 className="section-title">Not sure which stage fits? Start with a conversation.</h2><p className="section-text">A free 20-minute AI Consult is a simple place to start. We can work out the useful next step together.</p></div>
-      <a href="https://cal.com/jake-emvy/discovery-call" className="button primary" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
+      <a href={CAL_CONSULT_URL} className="button primary" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
     </section>
   </>
 }

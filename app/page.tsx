@@ -1,3 +1,4 @@
+import { CAL_CONSULT_URL } from '@/lib/cal-links'
 import { ArrowRight } from 'lucide-react'
 import JsonLd from '@/components/JsonLd'
 import { localBusiness, webSite } from '@/lib/schema/jsonld'
@@ -102,7 +103,7 @@ const caseStudies = [
 ]
 
 function HeroCtas() {
-  return <a href="https://cal.com/jake-emvy/discovery-call" className="button primary" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
+  return <a href={CAL_CONSULT_URL} className="button primary" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
 }
 
 export default function Home() {
@@ -254,7 +255,7 @@ export default function Home() {
             <p>
               A short conversation about the workflow, system, or operational issue you would like to improve.
             </p>
-            <a href="https://cal.com/jake-emvy/discovery-call" className="button primary" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
+            <a href={CAL_CONSULT_URL} className="button primary" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
           </article>
 
         </div>
