@@ -9,16 +9,18 @@ type ContactState = {
   name: string
   email: string
   company: string
-  role: string
+  location: string
   message: string
+  website: string
 }
 
 const initialState: ContactState = {
   name: '',
   email: '',
   company: '',
-  role: '',
+  location: '',
   message: '',
+  website: '',
 }
 
 export default function ContactPage() {
@@ -39,12 +41,15 @@ export default function ContactPage() {
         body: JSON.stringify(form),
       })
 
-      if (!response.ok) throw new Error('Contact submission failed')
+      if (!response.ok) {
+        const result = await response.json().catch(() => null)
+        throw new Error(result?.error || 'Your message could not be sent. Please try again.')
+      }
 
       setDone(true)
       setForm(initialState)
-    } catch {
-      setError('Something went wrong. Please try again.')
+    } catch (failure) {
+      setError(failure instanceof Error ? failure.message : 'Your message could not be sent. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -58,20 +63,21 @@ export default function ContactPage() {
         description="Use this form to discuss a workflow, system, or operational issue."
         image="https://images.unsplash.com/photo-1516321165247-4aa89a48be28?w=1800&q=90&auto=format&fit=crop"
       >
-        <a href={CAL_CONSULT_URL} className="button light" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
+        <a href="#local-consult" className="button primary">Local consult</a>
+        <a href={CAL_CONSULT_URL} className="button light" target="_blank" rel="noopener noreferrer">Online consult</a>
       </PageHero>
 
-      <section className="section">
+      <section className="section" id="local-consult">
         <div className="contact-band">
           <div className="contact-copy">
-            <p className="section-kicker">Direct contact</p>
+            <p className="section-kicker">Local consult</p>
             <h2 className="section-title">A short brief is enough to get the conversation moving.</h2>
             <p className="section-text">
-              Tell us what stage you are at, what the operational issue looks like, and what
-              outcome you want to create. EMVY can then point you toward the right next step.
+              Tell us where you are based, what workflow needs attention, and what you want to
+              improve. We will follow up to arrange the right local conversation.
             </p>
             <div className="contact-list">
-              <a href={CAL_CONSULT_URL} target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
+              <a href={CAL_CONSULT_URL} target="_blank" rel="noopener noreferrer">Book an online consult</a>
               <Link href="/services#assessment">AI Workflow Assessment</Link>
               <Link href="/services">View services</Link>
             </div>
@@ -94,6 +100,8 @@ export default function ContactPage() {
                       value={form.name}
                       onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
                       placeholder="Your name"
+                      minLength={2}
+                      maxLength={120}
                       required
                     />
                   </label>
@@ -104,6 +112,7 @@ export default function ContactPage() {
                       value={form.email}
                       onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))}
                       placeholder="Work email"
+                      maxLength={254}
                       required
                     />
                   </label>
@@ -116,15 +125,17 @@ export default function ContactPage() {
                       value={form.company}
                       onChange={(e) => setForm((prev) => ({ ...prev, company: e.target.value }))}
                       placeholder="Company name"
+                      maxLength={160}
                     />
                   </label>
                   <label>
-                    Role
+                    Suburb or location
                     <input
                       type="text"
-                      value={form.role}
-                      onChange={(e) => setForm((prev) => ({ ...prev, role: e.target.value }))}
-                      placeholder="Founder, director, ops lead..."
+                      value={form.location}
+                      onChange={(e) => setForm((prev) => ({ ...prev, location: e.target.value }))}
+                      placeholder="Where are you based?"
+                      maxLength={120}
                     />
                   </label>
                 </div>
@@ -134,12 +145,24 @@ export default function ContactPage() {
                     value={form.message}
                     onChange={(e) => setForm((prev) => ({ ...prev, message: e.target.value }))}
                     placeholder="What would you like help with?"
+                    minLength={10}
+                    maxLength={5000}
                     required
+                  />
+                </label>
+                <label className="contact-honeypot" aria-hidden="true">
+                  Website
+                  <input
+                    type="text"
+                    autoComplete="off"
+                    tabIndex={-1}
+                    value={form.website}
+                    onChange={(e) => setForm((prev) => ({ ...prev, website: e.target.value }))}
                   />
                 </label>
                 {error ? <p className="lp-error" role="alert">{error}</p> : null}
                 <button type="submit" className="button primary" disabled={loading} aria-busy={loading}>
-                  {loading ? 'Sending...' : 'Send enquiry'}
+                  {loading ? 'Sending...' : 'Send local consult enquiry'}
                 </button>
               </>
             )}

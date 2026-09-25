@@ -36,18 +36,21 @@ export default function Header() {
       </nav>
 
       <div className="header-actions">
+        <Link href="/contact#local-consult" className="button light small" onClick={() => setMobileOpen(false)}>
+          Local consult
+        </Link>
         <a
           href={CAL_CONSULT_URL}
           className="button primary small"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Book an AI Consult
+          Online consult
         </a>
-        <button className="menu-button" type="button" onClick={() => setMobileOpen((value) => !value)} aria-label="Open menu">
-          {mobileOpen ? <X size={18} /> : <Menu size={18} />}
-        </button>
       </div>
+      <button className="menu-button" type="button" onClick={() => setMobileOpen((value) => !value)} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen}>
+        {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+      </button>
 
       {mobileOpen ? (
         <div className="mobile-menu">
@@ -55,7 +58,6 @@ export default function Header() {
           <Link href="/use-cases" onClick={() => setMobileOpen(false)}>Use Cases</Link>
           <Link href="/about" onClick={() => setMobileOpen(false)}>About</Link>
           <Link href="/contact" onClick={() => setMobileOpen(false)}>Contact</Link>
-          <a href={CAL_CONSULT_URL} target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}>Book a 20-minute AI Consult</a>
         </div>
       ) : null}
     </header>

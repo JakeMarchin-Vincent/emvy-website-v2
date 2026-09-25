@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "repo": "/Users/DuskWunz/emvy/01-websites/emvy-website-v2/.worktrees/website-v2-baseline-001",
+  "repo": "/Users/DuskWunz/emvy/01-websites/emvy-website-v2/.worktrees/website-v2-contact-002",
   "feature": "website-v2-refresh",
   "status": "implementation-ready",
   "process": {
@@ -59,9 +59,9 @@
       }
     },
     "implementation": {
-      "activeTicket": "docs/tickets/website-v2-refresh/01-publish-live-baseline.md",
+      "activeTicket": "docs/tickets/website-v2-refresh/02-contact-and-retire-legacy.md",
       "ticketStatus": "approved",
-      "ticketSha256": "6cd29008bb5c7b686db203a921795b5eb6f167c2082a1850fd2ff5c9d89681ed",
+      "ticketSha256": "f55154d3a59d97d37850a052235c94b8b03f574095c053bc59696b272c2178ed",
       "approvedBy": "Founder",
       "approvedAt": "2026-09-25T04:37:27Z",
       "approvalEvidence": {
@@ -73,12 +73,12 @@
         "quote": "Approve this breakdown (recommended)",
         "sha256": "e276bfc69ea4f06bfab75da7991351d608fae24f95bd53df2ac5d67e98b6f39e"
       },
-      "tddPlan": "Pin the live deployment and source tree; verify current Home, Services, Contact, redirects and canonical booking URL against the clean commit. Publish that exact source and planning evidence on one GitHub branch/PR. Recheck remote commit and preview without touching production or provider state.",
+      "tddPlan": "Exercise the contact HTTP seam for valid delivery, invalid input, missing email configuration and provider failure; verify success only after delivery. Inspect old page/API callers and webhook registrations before retiring source, then check useful redirects and desktop/mobile contact behavior.",
       "sliceCommit": false,
       "worktree": {
         "isolated": true,
-        "branch": "codex/website-v2-baseline-001",
-        "path": "/Users/DuskWunz/emvy/01-websites/emvy-website-v2/.worktrees/website-v2-baseline-001"
+        "branch": "codex/website-v2-contact-002",
+        "path": "/Users/DuskWunz/emvy/01-websites/emvy-website-v2/.worktrees/website-v2-contact-002"
       }
     }
   }

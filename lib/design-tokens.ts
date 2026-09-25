@@ -30,7 +30,7 @@
 // 1. Typography scale
 // -----------------------------------------------------------------------------
 // Locked: Manrope (body), Space Grotesk (display), JetBrains Mono (mono).
-// Loaded via next/font/google in app/layout.tsx and exposed as CSS variables
+// Loaded from local @fontsource-variable assets in app/layout.tsx and exposed as CSS variables
 // --font-sans, --font-display, --font-mono.
 
 export const fontFamily = {

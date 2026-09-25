@@ -1,34 +1,13 @@
 import type { Metadata, Viewport } from "next"
 import type { ReactNode } from 'react'
-import { Manrope, Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import { colorDark } from "@/lib/design-tokens"
+import '@fontsource-variable/manrope/wght.css'
+import '@fontsource-variable/space-grotesk/wght.css'
+import '@fontsource-variable/jetbrains-mono/wght.css'
 import "./globals.css"
 import SiteChrome from "@/components/SiteChrome"
 import JsonLd from "@/components/JsonLd"
 import { organization, webSite, localBusiness } from "@/lib/schema/jsonld"
-
-// Self-hosted via next/font. Variable CSS vars feed the design tokens in
-// `lib/design-tokens.ts`; do not add a Google Fonts <link> alongside.
-const manrope = Manrope({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-sans',
-})
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['500', '600', '700'],
-  variable: '--font-display',
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600'],
-  variable: '--font-mono',
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://emvyai.com"),
@@ -85,10 +64,7 @@ export default function RootLayout({
   children: ReactNode
 }>) {
   return (
-    <html
-      lang="en-AU"
-      className={`${manrope.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
-    >
+    <html lang="en-AU">
       <body>
         <JsonLd data={[organization(), webSite(), localBusiness()]} />
         <SiteChrome>{children}</SiteChrome>
