@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "repo": "/Users/DuskWunz/emvy/01-websites/emvy-website-v2/.worktrees/website-v2-baseline-001",
+  "feature": "website-v2-refresh",
+  "status": "implementation-ready",
+  "process": {
+    "canonical": "mattpocock-wayfinder-to-spec-to-tickets-implement"
+  },
+  "boundary": {
+    "externalActionsAuthorised": false,
+    "note": "Production/provider changes remain outside this ledger. GitHub publication is within the founder-approved reviewable build workflow; production release is held to ticket 05."
+  },
+  "gates": {
+    "wayfinder": {
+      "status": "not-required",
+      "rationale": "The website cleanup frontier became specific after live/source audit and founder scope decisions: local contact primary, online booking secondary, retire legacy routes and remove website Convex. The separate EMVY commercial Wayfinder remains independent."
+    },
+    "toSpec": {
+      "status": "ready-for-agent",
+      "path": "docs/specs/2026-09-25-public-website-v2-refresh.md",
+      "sha256": "e50d64e3ce065333f6ffe392ac80a90be3b0c3b63227fdca8e644996f24a4619",
+      "issue": "https://github.com/duskmetamask-bit/emvy-website-v2/issues/3"
+    },
+    "testSeams": {
+      "status": "confirmed",
+      "description": "Retained desktop/mobile pages offer distinct local-contact and online-Cal.com paths; one controlled local enquiry is delivered without Convex; retired routes cannot execute; build and two-axis review pass.",
+      "confirmedBy": "Founder",
+      "confirmedAt": "2026-09-25T04:37:27Z",
+      "approvalEvidence": {
+        "path": ".emvy/process/website-v2-refresh-approval.md",
+        "recordedBy": "Codex",
+        "approvedBy": "Founder",
+        "approvedAt": "2026-09-25T04:37:27Z",
+        "recordedAt": "2026-09-25T04:37:27Z",
+        "quote": "yesa just make sure you have the right one please and get this right this is supposed to be a simple page with the consult button, but im more leaning to contact us as the option and removing the cal.com side as we are doing more local, but now im thinknig about it would be good for both as we want to look into online stuff as well, i want a online consult option and a local consult option as well",
+        "sha256": "e276bfc69ea4f06bfab75da7991351d608fae24f95bd53df2ac5d67e98b6f39e"
+      }
+    },
+    "toTickets": {
+      "status": "approved",
+      "path": "docs/tickets/website-v2-refresh",
+      "ticketSetSha256": "aa721fd88fb61aa9cda2c6469ff421e16cf3a7adcfc54a7e12fcaa155892e791",
+      "quiz": {
+        "completed": true,
+        "granularity": "Five serialized, bounded slices approved.",
+        "blockingEdges": "Baseline before contact, contact before Convex contract, backend before redesign, all before release.",
+        "mergeSplit": "No merge or split requested.",
+        "approvedBy": "Founder",
+        "approvedAt": "2026-09-25T04:37:27Z",
+        "approvalEvidence": {
+          "path": ".emvy/process/website-v2-refresh-approval.md",
+          "recordedBy": "Codex",
+          "approvedBy": "Founder",
+          "approvedAt": "2026-09-25T04:37:27Z",
+          "recordedAt": "2026-09-25T04:37:27Z",
+          "quote": "Approve this breakdown (recommended)",
+          "sha256": "e276bfc69ea4f06bfab75da7991351d608fae24f95bd53df2ac5d67e98b6f39e"
+        }
+      }
+    },
+    "implementation": {
+      "activeTicket": "docs/tickets/website-v2-refresh/01-publish-live-baseline.md",
+      "ticketStatus": "approved",
+      "ticketSha256": "6cd29008bb5c7b686db203a921795b5eb6f167c2082a1850fd2ff5c9d89681ed",
+      "approvedBy": "Founder",
+      "approvedAt": "2026-09-25T04:37:27Z",
+      "approvalEvidence": {
+        "path": ".emvy/process/website-v2-refresh-approval.md",
+        "recordedBy": "Codex",
+        "approvedBy": "Founder",
+        "approvedAt": "2026-09-25T04:37:27Z",
+        "recordedAt": "2026-09-25T04:37:27Z",
+        "quote": "Approve this breakdown (recommended)",
+        "sha256": "e276bfc69ea4f06bfab75da7991351d608fae24f95bd53df2ac5d67e98b6f39e"
+      },
+      "tddPlan": "Pin the live deployment and source tree; verify current Home, Services, Contact, redirects and canonical booking URL against the clean commit. Publish that exact source and planning evidence on one GitHub branch/PR. Recheck remote commit and preview without touching production or provider state.",
+      "sliceCommit": false,
+      "worktree": {
+        "isolated": true,
+        "branch": "codex/website-v2-baseline-001",
+        "path": "/Users/DuskWunz/emvy/01-websites/emvy-website-v2/.worktrees/website-v2-baseline-001"
+      }
+    }
+  }
+}
