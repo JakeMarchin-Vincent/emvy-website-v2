@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="300" viewBox="0 0 640 300" role="img" aria-labelledby="title desc">
+<title id="title">Finding a shared opening</title>
+<desc id="desc">Three calendar availability bands overlap at a selected Thursday 10:30 slot. Illustrative example.</desc>
+<rect width="640" height="300" fill="#f2efe7"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#102d2b">
+<text x="28" y="31" font-size="12" letter-spacing="1.5">SCHEDULING / SHARED AVAILABILITY</text>
+<text x="28" y="70" font-size="30" font-weight="700">Thursday, 10:30</text>
+<path d="M429 51h177" stroke="#16877f" stroke-width="1"/>
+<text x="429" y="72" font-size="16">A 30-minute opening</text>
+<g font-size="16" fill="#16877f">
+<text x="164" y="113">09:00</text><text x="287" y="113">10:00</text><text x="410" y="113">11:00</text><text x="533" y="113">12:00</text>
+</g>
+<g stroke="#c8d7c5" stroke-width="1">
+<path d="M164 126v125M287 126v125M410 126v125M533 126v125M604 126v125"/>
+</g>
+<g font-size="17"><text x="28" y="150">Design</text><text x="28" y="194">Operations</text><text x="28" y="238">You</text></g>
+<rect x="164" y="132" width="440" height="27" rx="2" fill="#e4e4d9"/>
+<rect x="164" y="176" width="440" height="27" rx="2" fill="#e4e4d9"/>
+<rect x="164" y="220" width="440" height="27" rx="2" fill="#e4e4d9"/>
+<rect x="221" y="132" width="257" height="27" rx="2" fill="#c8d7c5"/>
+<rect x="310" y="176" width="232" height="27" rx="2" fill="#16877f"/>
+<rect x="185" y="220" width="322" height="27" rx="2" fill="#b3cec0"/>
+<rect x="349" y="125" width="61" height="129" fill="#6de2d5" fill-opacity="0.64" stroke="#102d2b" stroke-width="1.5"/>
+<g fill="#102d2b"><circle cx="379.5" cy="145.5" r="4"/><circle cx="379.5" cy="189.5" r="4"/><circle cx="379.5" cy="233.5" r="4"/></g>
+<text x="28" y="279" font-size="16">One slot. Three calendars.</text>
+<text x="610" y="281" text-anchor="end" font-size="10" letter-spacing="1">ILLUSTRATIVE EXAMPLE</text>
+</g>
+</svg>

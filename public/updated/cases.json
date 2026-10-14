@@ -1,0 +1,145 @@
+[
+  {
+    "id": 1,
+    "title": "Inbox & email",
+    "heading": "Get the next step ready before you open the email.",
+    "copy": "Sort incoming work, gather the relevant history and prepare the reply or task. You review a clear next step without rebuilding the context for every conversation.",
+    "details": [
+      "Group messages by the work they need: answer, action, waiting or reference.",
+      "Prepare replies using the thread, approved business information and relevant records.",
+      "Turn commitments into a reviewable work list and flag replies still needed."
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Documents, quotes & proposals",
+    "heading": "Get client-ready work without rebuilding it each time.",
+    "copy": "Bring approved information, agreed details and templates into quotes, proposals, reports and handover packs. Get a consistent, checked draft with missing details flagged for review.",
+    "details": [
+      "Gather the relevant brief, scope, examples and source information.",
+      "Produce editable documents in your structure, style and branding.",
+      "Check completeness, calculations, source facts and layout before final review."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Calls & enquiries",
+    "heading": "Handle routine enquiries without stopping your day.",
+    "copy": "Answer agreed questions, capture what the customer needs and route the next step to the right person. Give your team a useful summary, with less voicemail and repeated information to work through.",
+    "details": [
+      "Answer routine questions using current, approved service information.",
+      "Capture enquiry details and prepare or create the agreed follow-up record.",
+      "Transfer a live call to a person, with context, when it needs their attention."
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Customer onboarding & follow-ups",
+    "heading": "Get new clients ready to start.",
+    "copy": "Bring their information, welcome documents and first tasks together, then show what is still needed. Prepare the next follow-up with the right context so the team can keep the start of the relationship organised.",
+    "details": [
+      "Build a checklist from the agreed service and client information.",
+      "Prepare the welcome pack, internal briefing and initial task records.",
+      "Check submitted information and draft requests for missing items or agreed next steps."
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Meetings, tasks & handovers",
+    "heading": "Keep work moving between check-ins.",
+    "copy": "Carry decisions, actions and context into the next agreed step, with clear review points. Your team can pick up the work without recreating the meeting or delivering another full briefing.",
+    "details": [
+      "Extract actual decisions and commitments from available notes, with source references.",
+      "Keep the working record, output and completion criteria together.",
+      "Pass work to the next agreed stage and surface missing inputs or decisions."
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Purchasing & suppliers",
+    "heading": "Compare the offers on the same terms.",
+    "copy": "Put costs, inclusions, exclusions and delivery details into a clear, sourced comparison before you commit. See unanswered questions and prepare the next supplier conversation without rebuilding the comparison by hand.",
+    "details": [
+      "Extract comparable information from quotes, proposals and product details.",
+      "Apply your criteria and show assumptions behind cost calculations.",
+      "Flag missing information and prepare clarification questions for review."
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Scheduling & coordination",
+    "heading": "Cut the back-and-forth around getting people together.",
+    "copy": "Compare availability, prepare suitable options and coordinate agreed changes in connected calendars. Keep the relevant people, meeting details and preparation together so arrangements are easier to manage.",
+    "details": [
+      "Compare permitted calendar availability with duration, time zone and meeting constraints.",
+      "Prepare a short set of suitable times and the required scheduling messages.",
+      "Create or update authorised events and carry the details into the meeting brief."
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Social media & content",
+    "heading": "Turn social activity into useful follow-through.",
+    "copy": "Bring relevant comments and questions into a work list, then prepare replies, customer tasks or content for review. Put what your audience is saying to use without manually rebuilding the context each time.",
+    "details": [
+      "Collect supported comments, mentions and agreed topics that matter to the business.",
+      "Separate service questions, follow-up needs and useful content ideas.",
+      "Develop replies, briefs and related content using approved source material and brand guidance."
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Reporting & visibility",
+    "heading": "See what needs attention without assembling the report.",
+    "copy": "Bring agreed figures and status updates together, with changes, gaps and questions clearly shown. Give your team a useful view of the business without the repeated work of collecting and formatting the same information.",
+    "details": [
+      "Gather the selected figures and status records into a consistent reporting structure.",
+      "Apply agreed calculations and flag unusual changes or missing data.",
+      "Produce a dated report with source links and a short list of questions to resolve."
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Recruitment & staff onboarding",
+    "heading": "Get hiring admin and new-starter preparation organised.",
+    "copy": "Prepare role documents, coordinate interview details and build induction checklists from your agreed process. Keep the administrative work moving while your team makes the hiring decisions and welcomes new staff.",
+    "details": [
+      "Draft role descriptions and interview materials from approved job requirements.",
+      "Organise scheduling, documents and administrative checklists for human review.",
+      "Prepare role-specific induction guides, training material and new-starter tasks."
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Project delivery tracking",
+    "heading": "See what is holding delivery up.",
+    "copy": "Bring milestones, outstanding inputs and blockers into one current view, with the next action ready for review. Give the team a clearer handover and fewer scattered status checks as the project progresses.",
+    "details": [
+      "Reconcile agreed milestones and responsibilities with connected project records.",
+      "Identify overdue steps, missing inputs and dependencies needing attention.",
+      "Prepare status updates, handover notes and proposed next actions."
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Industry & competitor monitoring",
+    "heading": "Know what changed and what may need a response.",
+    "copy": "Check agreed sources and prepare a short, sourced briefing tied to your business priorities. See relevant developments, their possible implications and a prepared next step without repeating the research each week.",
+    "details": [
+      "Track accessible industry, competitor and market sources at an agreed frequency.",
+      "Compare new findings with previous briefings and your stated priorities.",
+      "Prepare questions, options or follow-up tasks with evidence and uncertainty visible."
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Business knowledge & team assistance",
+    "heading": "Help your team handle more of the everyday work.",
+    "copy": "Make approved procedures and examples easier to find and use, with clear sources and escalation when a manager needs to decide. Give staff practical answers and role-specific guidance while reducing repeated explanations.",
+    "details": [
+      "Prepare answers that point to the relevant approved business source.",
+      "Turn procedures into guides, checklists and practical learning exercises.",
+      "Flag unanswered questions and outdated material for the source owner to review."
+    ]
+  }
+]
