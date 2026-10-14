@@ -28,7 +28,7 @@ export default function Header() {
   return (
     <header className="site-header">
       <Link className="brand" href="/" aria-label="EMVY — AI systems home">
-        <img src="/brand/logo-transparent.png" alt="EMVY" className="brand-img" />
+        <img src="/updated/assets/emvy-lockup.svg" alt="EMVY" className="brand-img" />
       </Link>
 
       <nav className="nav">

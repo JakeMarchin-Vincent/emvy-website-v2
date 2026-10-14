@@ -10,9 +10,11 @@ const primaryLinks = [
 
 const conversionLinks = [
   { label: 'Book a 20-minute AI Consult', href: CAL_CONSULT_URL },
-  { label: 'AI Workflow Assessment', href: '/services#assessment' },
-  { label: 'AI Builds', href: '/services#builds' },
-  { label: 'Ongoing Improvement', href: '/services#improvement' },
+  { label: 'Advice and planning', href: '/services#assessment' },
+  { label: 'Setup and integrations', href: '/services#integrations' },
+  { label: 'Agents and custom systems', href: '/services#builds' },
+  { label: 'Team training', href: '/services#training' },
+  { label: 'Ongoing guidance and support', href: '/services#improvement' },
 ]
 
 export default function Footer() {
@@ -21,7 +23,7 @@ export default function Footer() {
       <div className="site-footer__grid">
         <div className="site-footer__intro">
           <Link href="/" className="footer-brand" aria-label="EMVY — home">
-            <img src="/brand/logo-transparent.png" alt="EMVY" className="footer-brand__img" />
+            <img src="/updated/assets/emvy-lockup.svg" alt="EMVY" className="footer-brand__img" />
           </Link>
         </div>
 

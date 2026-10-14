@@ -4,50 +4,57 @@ import PageHero from '../../components/PageHero'
 
 export const metadata: Metadata = {
   title: 'Services',
-  description: 'Explore the EMVY service flow: consult, AI Workflow Assessment, build, and ongoing improvement.',
+  description: 'Explore EMVY advice, integrations, custom systems, team training, and ongoing support.',
 }
 
 const stages = [
   {
-    number: '01', id: 'consult', title: 'AI Consult', imageSide: 'left',
+    number: '01', id: 'assessment', title: 'Advice and planning', imageSide: 'left',
     image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1400&q=90&auto=format&fit=crop',
     imageAlt: 'People having a focused business conversation',
-    description: 'A focused, free 20-minute conversation about the part of the business you would like to make easier. We start with the real work, not a pre-set package.',
-    points: ['Bring a question, frustrating process, or idea worth exploring.', 'Talk through what is happening now and what a better next step could look like.', 'Leave with a clearer sense of whether an AI Assessment or scoped build is useful.'],
+    description: 'Make sense of the options, assess where AI could help, and decide what to tackle first.',
+    points: ['Map the people, processes, systems and repeated work involved.', 'Identify a useful starting point and where AI is a sensible fit.', 'Agree what progress would look like before choosing tools or a build.'],
   },
   {
-    number: '02', id: 'assessment', title: 'Assessment', imageSide: 'right',
+    number: '02', id: 'integrations', title: 'Setup and integrations', imageSide: 'right',
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=90&auto=format&fit=crop',
-    imageAlt: 'A team mapping a business workflow',
-    description: 'When more clarity is useful, we look more closely at how work moves, where information is held, and what is already in place.',
-    points: ['Map the people, tools, handoffs, and recurring work involved.', 'Identify where a clearer system could genuinely help.', 'Understand the business before deciding what is worth building.'],
+    imageAlt: 'A team planning how business tools work together',
+    description: 'Choose and configure suitable tools, then connect them with the systems and processes you already use.',
+    points: ['Keep the setup proportionate to the work.', 'Connect useful information and handoffs between tools.', 'Make access, review points and ownership clear.'],
   },
   {
-    number: '03', id: 'builds', title: 'Build', imageSide: 'left',
+    number: '03', id: 'builds', title: 'Agents and custom systems', imageSide: 'left',
     image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1400&q=90&auto=format&fit=crop',
     imageAlt: 'A person working with connected business systems',
-    description: 'EMVY builds AI around a clear need, using the tools and processes your business already relies on.',
-    points: ['Shape the system around a defined workflow and outcome.', 'Connect calls, enquiries, follow-up, admin, information, or handoffs where useful.', 'Keep the work practical for the people who will use it every day.'],
+    description: 'Build tailored assistants and workflows when the work calls for more than an off-the-shelf setup.',
+    points: ['Shape the system around a defined workflow and outcome.', 'Connect calls, enquiries, follow-up, admin, information or handoffs where useful.', 'Test real examples and keep human review where it matters.'],
   },
   {
-    number: '04', id: 'improvement', title: 'Improve', imageSide: 'right',
+    number: '04', id: 'training', title: 'Team training', imageSide: 'right',
+    image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1400&q=90&auto=format&fit=crop',
+    imageAlt: 'A team learning together',
+    description: 'Help your people use AI in their day-to-day work, with practical examples, clear boundaries and hands-on guidance.',
+    points: ['Practise with the work your team actually handles.', 'Make review, privacy and escalation boundaries clear.', 'Give people useful guidance they can return to.'],
+  },
+  {
+    number: '05', id: 'improvement', title: 'Ongoing guidance and support', imageSide: 'left',
     image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1400&q=90&auto=format&fit=crop',
     imageAlt: 'A team reviewing and improving a system together',
-    description: 'Useful systems should keep fitting the work as the business changes. Once a system is live, it can be reviewed, refined, and extended over time.',
-    points: ['Review what is working and where the next improvement is useful.', 'Refine the system as people, tools, and priorities change.', 'Keep a clear path for support and future additions.'],
+    description: 'Keep improving what is in place, work through new questions and adapt as your business and the tools change.',
+    points: ['Review what is working and where the next improvement is useful.', 'Refine the system as people, tools and priorities change.', 'Keep a clear path for support and future additions.'],
   },
 ]
 
 export default function ServicesPage() {
   return <>
-    <PageHero eyebrow="Services" title="A clear path from workflow to useful system." description="EMVY helps Australian businesses assess the work, build what helps, and improve operations over time." image="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1800&q=90&auto=format&fit=crop">
+    <PageHero eyebrow="Services" title="Support from first idea to everyday use." description="Advice, setup, custom systems, team training and ongoing guidance shaped around your work." image="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1800&q=90&auto=format&fit=crop">
       <a href={CAL_CONSULT_URL} className="button light" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a>
     </PageHero>
 
-    <section className="section service-flow-intro">
-      <p className="section-kicker">The service flow</p>
-      <h2 className="section-title">Start with the work. Move only where it helps.</h2>
-      <p className="section-text">Each stage gives the next one a clearer foundation. Some businesses start with a consult; others need a closer assessment before a focused build.</p>
+    <section className="section service-flow-intro" id="consult">
+      <p className="section-kicker">Ways we can help</p>
+      <h2 className="section-title">Start where you need us.</h2>
+      <p className="section-text">A free 20-minute AI Consult is one place to begin. From there, the right help might be advice, a tool setup, a tailored system, training or ongoing support.</p>
     </section>
 
     {stages.map((stage) => <section className="section service-stage" id={stage.id} key={stage.id}>
@@ -58,7 +65,6 @@ export default function ServicesPage() {
           <h2>{stage.title}</h2>
           <p>{stage.description}</p>
           <ul>{stage.points.map((point) => <li key={point}>{point}</li>)}</ul>
-          {stage.id === 'consult' ? <a href={CAL_CONSULT_URL} className="inline-link" target="_blank" rel="noopener noreferrer">Book a 20-minute AI Consult</a> : null}
         </div>
       </div>
     </section>)}
